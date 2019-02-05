@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const LocalGovernment = sequelize.define('LocalGovernment', {
     name: DataTypes.STRING,
-    stateID: DataTypes.NUMBER
+    stateID: DataTypes.INTEGER
   }, {});
   LocalGovernment.associate = function(models) {
     // associations can be defined here

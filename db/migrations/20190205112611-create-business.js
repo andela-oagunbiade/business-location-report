@@ -12,13 +12,18 @@ module.exports = {
         type: Sequelize.STRING
       },
       numberOfFemale: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       numberOfMale: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       localGovernmentID: {
-        type: Sequelize.NUMBER
+        references: {
+          model: 'LocalGovernments',
+          key: 'id'
+        },
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

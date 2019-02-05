@@ -12,7 +12,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       stateID: {
-        type: Sequelize.NUMBER
+        references: {
+          model: 'StateGovernments',
+          key: 'id'
+        },
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,

@@ -2,9 +2,9 @@
 module.exports = (sequelize, DataTypes) => {
   const Business = sequelize.define('Business', {
     name: DataTypes.STRING,
-    numberOfFemale: DataTypes.NUMBER,
-    numberOfMale: DataTypes.NUMBER,
-    localGovernmentId: DataTypes.NUMBER
+    numberOfFemale: DataTypes.INTEGER,
+    numberOfMale: DataTypes.INTEGER,
+    localGovernmentId: DataTypes.INTEGER
   }, {});
   Business.associate = function(models) {
     // associations can be defined here
