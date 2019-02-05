@@ -23,6 +23,7 @@ app.use('*', (req, res) => {
 })
 
 const errorHandler = (err, req, res, next) => {
+  console.log('-------Err', err)
   res.status(500).send({ error: err.name })
 }
 app.use(errorHandler)

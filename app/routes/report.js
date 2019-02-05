@@ -13,14 +13,34 @@ reportRouter.route('/:id')
     }
   })
 
-reportRouter.route('/lg/:id')
+reportRouter.route('/local-government/:id')
   .get(async (req, res, next) => {
     try {
-      const localGovernment = await LocalGovernment.findOne({
+      const rawInfo = await LocalGovernment.findOne({
         where: { id: req.params.id },
+        attributes: [],
         include: [{ model: Business }]
       })
-      res.status(200).send({ localGovernment })
+
+      if (rawInfo === null) {
+        return res.status(404).send({ message: 'No captured employee info for this LG.' })
+      }
+
+      let totalNumOfFemaleEmployeesInLocalGovernment = 0
+      let totalNumOfMaleEmployeesInLocalGovernment = 0
+
+      const formattedInfo = rawInfo.toJSON()
+      formattedInfo.Businesses.forEach((record) => {
+        totalNumOfFemaleEmployeesInLocalGovernment += record.numberOfFemale
+        totalNumOfMaleEmployeesInLocalGovernment += record.numberOfMale
+      })
+
+      formattedInfo.total = totalNumOfFemaleEmployeesInLocalGovernment + totalNumOfMaleEmployeesInLocalGovernment
+      formattedInfo.female = totalNumOfFemaleEmployeesInLocalGovernment
+      formattedInfo.male = totalNumOfMaleEmployeesInLocalGovernment
+      delete formattedInfo['Businesses']
+
+      res.status(200).send(formattedInfo)
     } catch(err) {
       next(err)
     }
@@ -32,8 +52,14 @@ reportRouter.route('/state-government/:id')
       const rawInfo = await LocalGovernment.findAll({
         where: { stateGovernmentID: req.params.id },
         attributes: ['name'],
-        include: [{ model: Business, required: true, attributes: ['name', 'numberOfFemale', 'numberOfMale'] }]
+        include: [{ model: Business, required: true,
+          attributes: ['name', 'numberOfFemale', 'numberOfMale']
+        }]
       })
+
+      if (rawInfo === null) {
+        return res.status(404).send({ message: 'No captured employee info for this State.' })
+      }
 
       let totalNumOfFemaleEmployeesInState = 0
       let totalNumOfMaleEmployeesInState = 0
