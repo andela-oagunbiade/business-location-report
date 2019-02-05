@@ -58,6 +58,46 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },
+    {
+      name: 'Nitel',
+      numberOfFemale: 900,
+      numberOfMale: 7000,
+      localGovernmentID: 7,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      name: 'Fiji',
+      numberOfFemale: 900,
+      numberOfMale: 7000,
+      localGovernmentID: 7,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      name: 'Globacom',
+      numberOfFemale: 900,
+      numberOfMale: 7000,
+      localGovernmentID: 7,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      name: 'APT',
+      numberOfFemale: 900,
+      numberOfMale: 7000,
+      localGovernmentID: 8,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    {
+      name: 'Nescafe',
+      numberOfFemale: 900,
+      numberOfMale: 7000,
+      localGovernmentID: 8,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
   ], {});
   },
 
