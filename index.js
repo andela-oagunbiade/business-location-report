@@ -3,7 +3,6 @@ require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
-const cors = require('cors')
 const reportRouter = require('./app/routes/report')
 
 const port = process.env.PORT
@@ -12,12 +11,20 @@ const app = express()
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use(cors())
 
 app.get('/', (req, res) => {
   res.status(200).send({ message: 'running...' })
 })
 
 app.use('/reports', reportRouter)
+
+app.use('*', (req, res) => {
+  res.sendStatus(404)
+})
+
+const errorHandler = (err, req, res, next) => {
+  res.status(500).send({ error: err.name })
+}
+app.use(errorHandler)
 
 app.listen(port)
