@@ -35,23 +35,38 @@ reportRouter.route('/state-government/:id')
         include: [{ model: Business, required: true, attributes: ['name', 'numberOfFemale', 'numberOfMale'] }]
       })
 
-      let totalNumOfEmployeesInState = 0
+      let totalNumOfFemaleEmployeesInState = 0
+      let totalNumOfMaleEmployeesInState = 0
+
       const formattedInfo = rawInfo.map((_row) => {
         const row = _row.toJSON()
-        let totalNumOfEmployeesInLocalGovernment = 0
+        let totalNumOfFemaleEmployeesInLocalGovernment = 0
+        let totalNumOfMaleEmployeesInLocalGovernment = 0
 
         row.Businesses.forEach((record) => {
-          totalNumOfEmployeesInLocalGovernment += (record.numberOfFemale + record.numberOfMale)
+          totalNumOfFemaleEmployeesInLocalGovernment += record.numberOfFemale
+          totalNumOfMaleEmployeesInLocalGovernment += record.numberOfMale
         })
 
         row.localGovernment = row.name
-        row.numOfEmployees = totalNumOfEmployeesInLocalGovernment
-        totalNumOfEmployeesInState += totalNumOfEmployeesInLocalGovernment
+        row.total = totalNumOfFemaleEmployeesInLocalGovernment + totalNumOfMaleEmployeesInLocalGovernment
+        row.female = totalNumOfFemaleEmployeesInLocalGovernment
+        row.male = totalNumOfMaleEmployeesInLocalGovernment
         delete row['Businesses']
         delete row['name']
+
+
+        totalNumOfFemaleEmployeesInState += totalNumOfFemaleEmployeesInLocalGovernment
+        totalNumOfMaleEmployeesInState += totalNumOfMaleEmployeesInLocalGovernment
+
         return row
       })
-      res.status(200).send({ totalNumOfEmployees: totalNumOfEmployeesInState, breakdown: formattedInfo })
+      res.status(200).send({
+        totalNumOfEmployees: totalNumOfFemaleEmployeesInState + totalNumOfMaleEmployeesInState,
+        totalNumOfFemales: totalNumOfFemaleEmployeesInState,
+        totalNumOfMales: totalNumOfMaleEmployeesInState,
+        breakdown: formattedInfo
+      })
     } catch (err) {
       next(err)
     }
