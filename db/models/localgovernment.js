@@ -2,19 +2,18 @@
 module.exports = (sequelize, DataTypes) => {
   const LocalGovernment = sequelize.define('LocalGovernment', {
     name: DataTypes.STRING,
-    stateID: DataTypes.INTEGER
+    stateGovernmentID: DataTypes.INTEGER
   }, {});
   LocalGovernment.associate = function(models) {
-    // associations can be defined here
-    models.LocalGovernment.belongsTo(models.State, {
+    models.LocalGovernment.belongsTo(models.StateGovernment, {
       onDelete: 'CASCADE',
       foreignKey: {
-        name: 'stateID',
+        name: 'stateGovernmentID',
         allowNull: false
       }
     })
 
-    models.LocalGovernment.hasMany(models.Business, { as: 'localGovernmentID' })
+    models.LocalGovernment.hasMany(models.Business, { foreignKey: 'localGovernmentID' })
   };
   return LocalGovernment;
 };

@@ -11,7 +11,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      stateID: {
+      stateGovernmentID: {
         references: {
           model: 'StateGovernments',
           key: 'id'

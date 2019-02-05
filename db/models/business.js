@@ -4,16 +4,12 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     numberOfFemale: DataTypes.INTEGER,
     numberOfMale: DataTypes.INTEGER,
-    localGovernmentId: DataTypes.INTEGER
+    localGovernmentID: DataTypes.INTEGER
   }, {});
   Business.associate = function(models) {
-    // associations can be defined here
-    models.Business.belongsTo(models.LocalGovernment, {
+    this.belongsTo(models.LocalGovernment, {
       onDelete: 'CASCADE',
-      foreignKey: {
-        name: 'localGovermentID',
-        allowNull: false
-      }
+      foreignKey: 'localGovernmentID'
     })
   };
   return Business;

@@ -4,8 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.INTEGER
   }, {});
   StateGovernment.associate = function(models) {
-    // associations can be defined here
-    models.StateGovernment.hasMany(models.LocalGovernment, { as: 'stateID'})
+    models.StateGovernment.hasMany(models.LocalGovernment, { foreignKey: 'stateGovernmentID' })
   };
   return StateGovernment;
 };
