@@ -13,11 +13,12 @@
 - Run `npm run db:seed`
 - Run `npm start`
 
+#### Local Government Report
 - Make GET Request `http://localhost:3330/reports/local-government/1` to get
-report for the local govermnet with id of `1` in the local government table.
+report for the local governmnet with id of `1` in the local government table.
 
 Sample Response:
-```json
+```js
 {
   localGovernment: "Ikeja",
   totalNumOfEmployeesInLocalGovernment: 9150,
@@ -26,11 +27,12 @@ Sample Response:
 }
 ```
 
+#### State Government Report
 - Make GET Request `http://localhost:3330/reports/state-government/1` to get
 report for the state with id of `1` in the state government table.
 
 Sample Response:
-```json
+```js
 {
   stateGovernment: "Lagos",
   totalNumberOfEmployeesInStateGovernment: 18050,
@@ -53,11 +55,12 @@ Sample Response:
 }
 ```
 
-- Make GET Request `http://localhost:3330/reports/state-government/1` to get
-report for the state with id of `1` in the state government table.
+#### Federal Government Report
+- Make GET Request `http://localhost:3330/reports/federal-government/1` to get
+report for the country with id of `1` in the federal government table.
 
 Sample Response:
-```json
+```js
 {
   federalGovernment: "Nigeria",
   totalNumberOfEmployees: 57550,
