@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('StateGovernments', {
+    return queryInterface.createTable('FederalGovernments', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,14 +10,6 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING
-      },
-      federalGovernmentID: {
-        references: {
-          model: 'FederalGovernments',
-          key: 'id'
-        },
-        allowNull: false,
-        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -30,6 +22,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('StateGovernments');
+    return queryInterface.dropTable('FederalGovernments');
   }
 };
